@@ -1,5 +1,5 @@
 var map;
-var festivalData;
+var tweetData;
 	
 var myIcon = L.icon({
     iconUrl : 'hurricane-icon-42370.png',
@@ -8,7 +8,7 @@ var myIcon = L.icon({
 
 function initialize()   {
         map = L.map('mapdiv');
-        map.setView([51.50800254386003, -0.12679273896889875], 5);
+        map.setView([53.8043, -1.5548], 16);
             
         //Load tiles from open street map
         L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -18,10 +18,10 @@ function initialize()   {
 }
 
 
-/*function fetchData()	{
+function fetchData()	{
 	
 	//Define array to hold results returned from server
-	festivalData = new Array();
+	tweetData = new Array();
 	
 	//AJAX request to server; accepts a URL to which the request is sent 
 	//and a callback function to execute if the request is successful. 
@@ -30,15 +30,11 @@ function initialize()   {
 		//Populate tweetData with results
 		for (var i = 0; i < results.length; i++ )	{
 			
-			festivalData.push ({
+			tweetData.push ({
 				id: results[i].id, 
 				body: results[i].body, 
 				lat: results[i].lat, 
-				lon: results[i].lon,
-				genre: results[i].genre,
-				month: results[i].month,
-				countrty: results[i].country,
-				website:results[i].website
+				lon: results[i].lon
 			}); 
 		}
 		
@@ -46,43 +42,13 @@ function initialize()   {
 	});
 	
 	
-}*/
-
-document.getElementById("monthSelector").addEventListener('change', function(){
-	fetchFestivals(this.value);
-});
-
-function fetchFestivals(monthName){
-	festivalData = new Array();
-	
-	//AJAX request to server; accepts a URL to which the request is sent 
-	//and a callback function to execute if the request is successful. 
-	$.getJSON("fetchData.php", { month: monthName }, function(results)	{ 
-		
-		//Populate tweetData with results
-		for (var i = 0; i < results.length; i++ )	{
-			
-			festivalData.push ({
-				id: results[i].id, 
-				body: results[i].body, 
-				lat: results[i].lat, 
-				lon: results[i].lon,
-				genre: results[i].genre,
-				month: results[i].month,
-				countrty: results[i].country,
-				website:results[i].website
-			}); 
-		}
-		
-		plotFestivals(); 
-	});
 }
 
-function plotFestivals()	{	
+function plotTweets()	{	
 	
-		for (var i = 0; i< festivalData.length; i++)	{ 
-		    var markerLocation = new L.LatLng(festivalData[i].lat, festivalData[i].lon);
-            var marker = new L.Marker(markerLocation,{icon:myIcon}).addTo(map).bindPopup(festivalData[i].body + '</br>' + festivalData[i].genre + '</br>' + festivalData[i].month + '</br>' + '<a href="' + festivalData[i].website + '">' + festivalData[i].website + '</a>');			
+		for (var i = 0; i< tweetData.length; i++)	{ 
+		    var markerLocation = new L.LatLng(tweetData[i].lat, tweetData[i].lon);
+            var marker = new L.Marker(markerLocation,{icon:myIcon}).addTo(map).bindPopup(tweetData[i].body);			
 		}
 	}
 
