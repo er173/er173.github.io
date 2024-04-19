@@ -2,12 +2,14 @@
 	//Returns JSON data to Javascript file
 	header("Content-type:application/json");
 	
+	$monthName = $_GET['month'];
+	
 	//Connect to db 
 	$pgsqlOptions = "host='localhost' dbname='geog5871' user='geog5871student' password='Geibeu9b'";
 	$dbconn = pg_connect($pgsqlOptions) or die ('connection failure');
 	
 	//Define sql query
-	$query = "SELECT oid, body, latitude, longitude, genre, month, country, website FROM festivals";
+	$query = "SELECT oid, body, latitude, longitude, genre, month, country, website FROM festivals WHERE month LIKE '%{$monthName}'";
 
 	//Execute query
 	$result = pg_query($dbconn, $query) or die ('Query failed: '.pg_last_error());
