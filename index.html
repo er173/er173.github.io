@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+    <title>festivals</title>
+    <!-- link to the Leaflet stylesheet-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" /> 
+    <!-- link to the Leaflet JavaScript library-->
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+<!-- link to the stylesheet-->
+    <link rel="stylesheet" href="style.css" /> 
+<!-- link to the JQuery library-->
+    <script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<!-- link to your JS file-->
+    <script language="javascript" type="text/javascript" src="script.js"></script>
+</head>
+<body onload = initialize()>
+    <!--The map div which hosts map object -->
+    
+
+	<div class = "title">
+		<h1>Music Festivals Map</a></h1>
+	</div>
+
+	<div id="sometext"> Click on buttons to fetch or clear data. Click on icons on the map to view tweets. Zoom in/out and pan around to explore the other part of the map.</div>
+	
+	<div class = "wrapper">
+		<button onclick = 'fetchData()'>Fetch Data</button>
+		<button onclick = 'clearData()'>Clear Data</button>
+		<br /><br />
+		<div id = 'textWrap'></div>
+	</div>
+	
+	<select id="typeFilter">
+        <option value="all">All</option>
+        <option value="type1">Type 1</option>
+        <option value="type2">Type 2</option>
+    </select>
+	
+	<div id="mapdiv"></div>
+	
+</body>
